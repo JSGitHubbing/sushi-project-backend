@@ -1,9 +1,9 @@
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { DataSourceOptions } from 'typeorm';
 import { SwaggerConfig } from "./swagger-config";
 
 interface Configuration {
     port: number,
-    database: TypeOrmModuleOptions,
+    database: DataSourceOptions,
     swagger: SwaggerConfig,
 }
 
@@ -16,7 +16,7 @@ export default (): Configuration => ({
         database: process.env.DATABASE_SCHEMA,
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
-        entities: ["src/**/*.ts"],
+        entities: [__dirname + (process.env.DATABASE_ENTITY_DIR || '/../**/*.entity{.ts,.js}')],
         synchronize: true,
     },
     swagger: {
