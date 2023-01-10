@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AlreadyExistsException } from 'src/error-handling/already-exists/already-exists-exception';
+import { AlreadyExistsException } from 'src/error-handling/exceptions/already-exists-exception';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { USER_REPOSITORY } from '../providers/user.providers';
