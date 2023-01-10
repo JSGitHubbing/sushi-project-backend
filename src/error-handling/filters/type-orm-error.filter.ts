@@ -2,6 +2,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { EntityNotFoundError } from 'typeorm';
+import { HttpErrorDto } from '../http-error.dto';
 
 @Catch(EntityNotFoundError)
 export class TypeORMErrorFilter implements ExceptionFilter {
@@ -16,11 +17,13 @@ export class TypeORMErrorFilter implements ExceptionFilter {
             exception: exception
         });
 
+        const httpError: HttpErrorDto = {
+            error: exception.name,
+            statusCode: HttpStatus.NOT_FOUND,
+        }
+
         response
             .status(HttpStatus.NOT_FOUND)
-            .json({
-                error: exception.name,
-                statusCode: HttpStatus.NOT_FOUND,
-            });
+            .json(httpError);
     }
 }

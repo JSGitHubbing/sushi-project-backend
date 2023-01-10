@@ -1,6 +1,7 @@
 
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { HttpErrorDto } from '../http-error.dto';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -15,11 +16,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
             exception: exception
         });
 
+        const httpError: HttpErrorDto = {
+            error: exception.name,
+            statusCode: exception.getStatus(),
+        }
+
         response
             .status(HttpStatus.NOT_FOUND)
-            .json({
-                error: exception.name,
-                statusCode: exception.getStatus(),
-            });
+            .json(httpError);
     }
 }
