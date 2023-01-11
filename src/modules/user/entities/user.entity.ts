@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Image } from "src/modules/image/entities/image.entity";
+import { Entity, OneToOne, JoinColumn, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity()
 export class User {
@@ -16,4 +17,8 @@ export class User {
 
     @Column({ default: true, select: false, name: 'enabled' })
     isEnabled: boolean;
+
+    @OneToOne(() => Image)
+    @JoinColumn({ name: 'image_id' })
+    image: Image;
 }
