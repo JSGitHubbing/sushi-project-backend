@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseFilters } from '@nestjs/common';
-import { HttpExceptionFilter } from 'src/error-handling/filters/http-exception.filter';
-import { TypeORMErrorFilter } from 'src/error-handling/filters/type-orm-error.filter';
+import { HttpExceptionFilter, TypeORMErrorFilter } from 'src/core/error-handling';
 import { User } from '../entities/user.entity';
 import { UserService } from '../service/user.service';
 
@@ -20,16 +19,6 @@ export class UserController {
     @Post()
     create(@Body() user: User): Promise<User> {
         return this.userService.create(user);
-    }
-
-    @Put('activate')
-    activate(@Param() params: any): Promise<User> {
-        return this.userService.activate(params.id);
-    }
-
-    @Put('deactivate')
-    deactivate(@Param() params: any): Promise<User> {
-        return this.userService.deactivate(params.id);
     }
 
     @Delete(':id')

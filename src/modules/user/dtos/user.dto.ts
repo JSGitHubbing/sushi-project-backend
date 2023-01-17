@@ -1,5 +1,8 @@
-export interface User {
+import { Image } from "src/modules/image/entities/image.entity";
+
+export interface UserDto {
     id: number;
-    username: string;
-    password: string;
+    name: string;
+    surname: string;
+    image: Image;
 }

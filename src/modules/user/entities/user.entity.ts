@@ -6,17 +6,11 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true })
-    username: string;
+    @Column()
+    name: string;
 
-    @Column({ select: false })
-    password: string;
-
-    @Column({ default: false, name: 'active' })
-    isActive: boolean;
-
-    @Column({ default: true, select: false, name: 'enabled' })
-    isEnabled: boolean;
+    @Column()
+    surname: string;
 
     @OneToOne(() => Image)
     @JoinColumn({ name: 'image_id' })

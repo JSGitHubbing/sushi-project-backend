@@ -1,5 +1,4 @@
-
-import { DATA_SOURCE } from 'src/database/database.providers';
+import { DATA_SOURCE } from 'src/core/database/database.providers';
 import { DataSource } from 'typeorm';
 import { User } from '../entities/user.entity';
 

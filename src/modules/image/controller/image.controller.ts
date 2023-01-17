@@ -1,8 +1,7 @@
 import { Controller, Get, Param, UseFilters } from '@nestjs/common';
 import { ImageService } from '../service/image.service';
 import { Image } from '../entities/image.entity';
-import { TypeORMErrorFilter } from 'src/error-handling/filters/type-orm-error.filter';
-import { HttpExceptionFilter } from 'src/error-handling/filters/http-exception.filter';
+import { HttpExceptionFilter, TypeORMErrorFilter } from 'src/core/error-handling';
 
 @Controller('image')
 @UseFilters(TypeORMErrorFilter, HttpExceptionFilter)
