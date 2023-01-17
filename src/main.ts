@@ -2,14 +2,14 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from '@nestjs/swagger/dist';
-import { SwaggerConfig } from 'config/swagger-config';
+import { SwaggerConfig } from 'src/core/config/swagger-config';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
 
   const fs = require('fs');
-  const keyFile = fs.readFileSync(__dirname + process.env.SSL_KEY);
-  const certFile = fs.readFileSync(__dirname + process.env.SSL_CRT);
+  const keyFile = fs.readFileSync(process.env.SSL_KEY);
+  const certFile = fs.readFileSync(process.env.SSL_CRT);
 
   const app = await NestFactory.create(AppModule, {
     httpsOptions: {

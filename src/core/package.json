@@ -1,0 +1,16 @@
+{
+  "name": "curry-core",
+  "version": "1.0.0",
+  "description": "Core module to manage authentication and basic route configuraiton for API REST",
+  "main": "index.js",
+  "scripts": {
+    "test": "nest test"
+  },
+  "keywords": [
+    "core",
+    "api",
+    "auth"
+  ],
+  "author": "Jesús Ortega Miguel",
+  "license": "ISC"
+}
