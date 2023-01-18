@@ -1,14 +1,16 @@
 import { JwtSignOptions } from '@nestjs/jwt';
 import { DataSourceOptions } from 'typeorm';
+import { BcryptConfig } from './bcrypt-config';
 import { SwaggerConfig } from './swagger-config';
 
 interface Configuration {
-  port: number;
-  database: DataSourceOptions;
-  swagger: SwaggerConfig;
+  port: number,
+  database: DataSourceOptions,
+  swagger: SwaggerConfig,
   jwt: {
-    signOptions: JwtSignOptions
-  }
+    signOptions: JwtSignOptions,
+  },
+  bcrypt: BcryptConfig,
 }
 
 export default (): Configuration => ({
@@ -35,5 +37,8 @@ export default (): Configuration => ({
       secret: process.env.JWT_SECRET || '',
       expiresIn: process.env.TOKEN_EXPIRATION_TIME || '1d',
     }
+  },
+  bcrypt: {
+    saltRounds: 10,
   }
 });

@@ -8,7 +8,7 @@ export class AuthUser {
     @Column({ unique: true })
     username: string;
 
-    @Column({ select: false })
+    @Column()
     password: string;
 
     @Column({ default: false, name: 'active' })

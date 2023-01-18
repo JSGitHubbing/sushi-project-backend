@@ -10,6 +10,6 @@ import configuration from './config/configuration';
             isGlobal: true,
         }),
         AuthModule
-    ]
+    ],
 })
 export class CoreModule { }

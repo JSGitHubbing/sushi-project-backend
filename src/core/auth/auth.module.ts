@@ -8,6 +8,7 @@ import { AccessTokenStrategy } from './api/middleware/strategies/jwt.auth';
 import { authProviders, routeSecurityProviders } from './api/providers/auth.providers';
 import { AuthUserService } from './api/services/auth-user/auth-user.service';
 import { AuthService } from './api/services/auth/auth.service';
+import { CryptoService } from './lib/crypto/crypto.service';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AuthService } from './api/services/auth/auth.service';
     AccessTokenStrategy,
     AuthUserService,
     AuthService,
+    CryptoService,
   ],
   controllers: [AuthUserController, AuthController],
 })

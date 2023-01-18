@@ -1,6 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
+import { CryptoService } from 'src/core/auth/lib/crypto/crypto.service';
 import configuration from 'src/core/config/configuration';
 import { Repository } from 'typeorm';
 import { AccessTokenInfo } from '../../dtos/access-token-info';
@@ -18,6 +19,7 @@ export class AuthService {
     private authUserTokenRepository: Repository<AuthUserToken>,
     private jwtService: JwtService,
     private configurationService: ConfigService,
+    private cryptoService: CryptoService,
   ) { }
 
   async login(loginDto: AuthUserDto): Promise<AccessTokenDto> {
@@ -25,7 +27,11 @@ export class AuthService {
       where: { username: loginDto.username },
     });
 
-    // TODO check password
+    const passwordCorrect = await this.cryptoService.verify(loginDto.password, user.password);
+
+    if (!passwordCorrect)
+      throw new UnauthorizedException('The username or password provided are not correct.');
+
 
     const info: AccessTokenInfo = { userId: user.id, username: user.username };
 
