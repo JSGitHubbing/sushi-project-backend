@@ -14,6 +14,6 @@ export class SeasonDto {
   @ApiProperty()
   seasonNumber: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: [ChapterDto] })
   chapters: ChapterDto[];
 }

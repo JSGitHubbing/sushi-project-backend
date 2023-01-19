@@ -1,4 +1,4 @@
-import { ImageMapper } from 'src/modules/image/dto/mapper/image.dto.mapper';
+import { ImageMapper } from 'src/modules/image/dtos/mapper/image.dto.mapper';
 import { Serie } from '../../entities/serie/serie.entity';
 import { SerieDto } from '../serie.dto';
 import { SeasonListMapper } from './season.dto.mapper';

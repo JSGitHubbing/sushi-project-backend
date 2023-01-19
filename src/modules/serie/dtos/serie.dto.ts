@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ImageDto } from 'src/modules/image/dto/image.dto';
+import { ImageDto } from 'src/modules/image/dtos/image.dto';
 import { SeasonDto } from './season.dto';
 
 export class SerieDto {
@@ -15,6 +15,6 @@ export class SerieDto {
   @ApiProperty()
   image: ImageDto;
 
-  @ApiProperty()
+  @ApiProperty({ type: [SeasonDto] })
   seasons: SeasonDto[];
 }

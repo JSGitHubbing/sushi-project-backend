@@ -1,4 +1,4 @@
-import { ImageMapper } from 'src/modules/image/dto/mapper/image.dto.mapper';
+import { ImageMapper } from 'src/modules/image/dtos/mapper/image.dto.mapper';
 import { Film } from '../../entities/film/film.entity';
 import { FilmDto } from '../film.dto';
 

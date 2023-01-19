@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Image } from 'src/modules/image/entities/image.entity';
+import { Image } from 'src/modules/image/entities/image/image.entity';
 
 @Entity()
 export class Film {
