@@ -1,16 +1,17 @@
 import { JwtSignOptions } from '@nestjs/jwt';
+import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
 import { BcryptConfig } from './bcrypt-config';
 import { SwaggerConfig } from './swagger-config';
 
 interface Configuration {
-  port: number,
-  database: DataSourceOptions,
-  swagger: SwaggerConfig,
+  port: number;
+  database: DataSourceOptions;
+  swagger: SwaggerConfig;
   jwt: {
-    signOptions: JwtSignOptions,
-  },
-  bcrypt: BcryptConfig,
+    signOptions: JwtSignOptions;
+  };
+  bcrypt: BcryptConfig;
 }
 
 export default (): Configuration => ({
@@ -23,8 +24,15 @@ export default (): Configuration => ({
     username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     entities: [
-      __dirname +
-      (process.env.DATABASE_ENTITY_DIR || '/../**/*.entity{.ts,.js}'),
+      join(
+        __dirname,
+        process.env.DATABASE_ENTITY_DIR || '/**/*.entity{.ts,.js}',
+      ),
+      join(
+        __dirname,
+        '../../modules',
+        process.env.DATABASE_ENTITY_DIR || '/**/*.entity{.ts,.js}',
+      ),
     ],
     synchronize: process.env.ENV === 'dev',
   },
@@ -36,9 +44,9 @@ export default (): Configuration => ({
     signOptions: {
       secret: process.env.JWT_SECRET || '',
       expiresIn: process.env.TOKEN_EXPIRATION_TIME || '1d',
-    }
+    },
   },
   bcrypt: {
     saltRounds: 10,
-  }
+  },
 });
