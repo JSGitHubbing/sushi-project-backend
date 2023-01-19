@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AlreadyExistsException } from 'src/core/error-handling';
 import { Repository } from 'typeorm';
+import { UserMapper } from '../dtos/mapper/user.dto.mapper';
+import { UserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { USER_REPOSITORY } from '../providers/user.providers';
 
@@ -11,12 +12,12 @@ export class UserService {
         private userRepository: Repository<User>,
     ) { }
 
-    async findById(id: number): Promise<User> {
-        return this.userRepository.findOneByOrFail({ id });
+    async findById(id: number): Promise<UserDto> {
+        return this.userRepository.findOneByOrFail({ id }).then(UserMapper);
     }
 
-    async create(user: User): Promise<User> {
-        return this.userRepository.save(user);
+    async create(user: UserDto): Promise<UserDto> {
+        return this.userRepository.save(user).then(UserMapper);;
     }
 
     async delete(userId: number): Promise<void> {

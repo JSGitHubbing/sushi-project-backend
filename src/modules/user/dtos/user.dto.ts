@@ -1,8 +1,16 @@
-import { Image } from "src/modules/image/entities/image.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { ImageDto } from "src/modules/image/dto/image.dto";
 
-export interface UserDto {
+export class UserDto {
+    @ApiProperty()
     id: number;
+
+    @ApiProperty()
     name: string;
+
+    @ApiProperty()
     surname: string;
-    image: Image;
+
+    @ApiProperty()
+    image: ImageDto;
 }
