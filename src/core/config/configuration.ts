@@ -5,6 +5,7 @@ import { BcryptConfig } from './bcrypt-config';
 import { SwaggerConfig } from './swagger-config';
 
 interface Configuration {
+  apiPrefix: string;
   port: number;
   database: DataSourceOptions;
   swagger: SwaggerConfig;
@@ -15,6 +16,7 @@ interface Configuration {
 }
 
 export default (): Configuration => ({
+  apiPrefix: 'api',
   port: parseInt(process.env.APP_PORT) || 3000,
   database: {
     type: 'mysql',

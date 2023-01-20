@@ -6,20 +6,12 @@ import { SwaggerConfig } from 'src/core/config/swagger-config';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-
-  const fs = require('fs');
-  const keyFile = fs.readFileSync(process.env.SSL_KEY);
-  const certFile = fs.readFileSync(process.env.SSL_CRT);
-
-  const app = await NestFactory.create(AppModule, {
-    httpsOptions: {
-      key: keyFile,
-      cert: certFile,
-    },
-  });
+  const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('port');
+  const apiPrefix = configService.get<string>('apiPrefix');
+  app.setGlobalPrefix(apiPrefix);
 
   // SWAGGER CONFIG
   const swaggerConfig = configService.get<SwaggerConfig>('swagger');
@@ -30,7 +22,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup(`${apiPrefix}/docs`, app, document);
 
   await app.listen(port);
 }
