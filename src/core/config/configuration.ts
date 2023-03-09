@@ -13,6 +13,7 @@ interface Configuration {
     signOptions: JwtSignOptions;
   };
   bcrypt: BcryptConfig;
+  mediaPath: string;
 }
 
 export default (): Configuration => ({
@@ -51,4 +52,5 @@ export default (): Configuration => ({
   bcrypt: {
     saltRounds: 10,
   },
+  mediaPath: process.env.MEDIA_PATH || 'C:/',
 });
