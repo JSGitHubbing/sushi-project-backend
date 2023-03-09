@@ -22,8 +22,12 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup(`${apiPrefix}/docs`, app, document);
+  const swaggerPath = `${apiPrefix}/docs`;
+  SwaggerModule.setup(swaggerPath, app, document);
 
-  await app.listen(port);
+  await app.listen(port).then((_) => {
+    console.log(`Server started at port ${port}`);
+    console.log(`Swagger deployed at ${swaggerPath}`);
+  });
 }
 bootstrap();
